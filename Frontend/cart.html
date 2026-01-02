@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .back-arrow {
+      font-size: 26px;
+      margin: 15px;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .back-arrow:hover {
+      opacity: 0.7;
+    }
+
+    .cart-header {
+      padding: 15px 25px;
+      background: #6e8aa8;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <!-- Header -->
+  <header class="cart-header">
+    <h2>My Cart</h2>
+  </header>
+  <!-- Back Arrow -->
+  <div class="back-arrow" onclick="goBack()">⬅️ Back</div>
+
+  <!-- Cart Items -->
+  <div id="cart"></div>
+
+  <script src="cart.js"></script>
+
+  
+
+</body>
+</html>

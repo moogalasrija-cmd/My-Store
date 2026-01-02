@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Products</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div style="
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  border-bottom:2px solid #ddd;
+  background:#007bff;
+">
+  
+  <!-- Logo + Dropdown -->
+  <div style="display:flex; align-items:center; gap:10px; position:relative;">
+    <div id="logoY" style="
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      background:#FFD700; /* Yash color */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      font-size:20px;
+      color:#007bff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      cursor:pointer;
+    ">Y</div>
+
+    <span style="font-size:22px; font-weight:bold; color:white;">MyStore</span>
+
+    <!-- Dropdown Menu -->
+    <div id="dropdownMenu" style="
+      display:none;
+      position:absolute;
+      top:50px;
+      left:0;
+      background:white;
+      color:#333;
+      min-width:150px;
+      border-radius:8px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.2);
+      z-index:100;
+      padding:10px 0;
+    ">
+      <a href="profile.html" style="display:block; padding:8px 15px; text-decoration:none; color:#007bff; font-weight:500;">👤 Your Profile</a>
+      <a href="#" onclick="logout()" style="display:block; padding:8px 15px; text-decoration:none; color:#ff4d4d; font-weight:500;">🚪 Logout</a>
+      <div style="padding:8px 15px;"></div>
+    </div>
+  </div>
+
+  <!-- View Cart Button -->
+  <a 
+    href="cart.html"
+    style="
+      text-decoration:none;
+      color:white;
+      background:#678ecc;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:600;
+    "
+  > View Cart
+  </a>
+  </div>
+  <!-- ✅ NavBAR -->
+<nav class="top-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="login.html">🔐 Login</a>
+  <a href="#" onclick="logout()">🚪 Logout</a>
+  <a href="#" onclick="toggleTheme()">🌗 Theme</a>
+</nav>
+<h2>All Products</h2>
+<div id="products" class="products"></div>
+<script src="index.js?v=2"></script>
+</body>
+</html>
+<style>
+  .top-nav {
+  padding: 12px 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+.top-nav a {
+  color: rgb(69, 69, 207);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+</style>

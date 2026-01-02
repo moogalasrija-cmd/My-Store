@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+<base href="/" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 30px;
+      width: 350px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .buttons button {
+      width: 48%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .cancel-btn {
+      background: #6c757d;
+      color: white;
+    }
+
+    .submit-btn {
+      background: #007bff;
+      color: white;
+    }
+
+    .cancel-btn:hover {
+      background: #5a6268;
+    }
+
+    .submit-btn:hover {
+      background: #0056b3;
+    }
+
+    .links {
+      margin-top: 10px;
+      text-align: right;
+      font-size: 14px;
+    }
+
+    .links a {
+      color: #007bff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-box">
+  <h2>Login</h2>
+
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+
+    <div class="buttons">
+      <button type="button" class="cancel-btn" onclick="cancelLogin()">Cancel</button>
+      <button type="submit" class="submit-btn">Submit</button>
+    </div>
+  </form>
+
+  <div class="links">
+    <a onclick="forgotPassword()">Forgot Password?</a>
+  </div>
+
+  <p class="error" id="errorMsg"></p>
+</div>
+
+<script>
+  function forgotPassword() {
+    alert("Password reset link sent to your email (demo)");
+  }
+
+  function cancelLogin() {
+    document.getElementById("loginForm").reset();
+    document.getElementById("errorMsg").innerText = "";
+  }
+
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorMsg = document.getElementById("errorMsg");
+
+    errorMsg.innerText = "";
+
+    // Username validation
+    if (username.length < 3) {
+      errorMsg.innerText = "Username must be at least 3 characters";
+      return;
+    }
+
+    // Email validation
+    if (!email.includes("@")) {
+      errorMsg.innerText = "Enter a valid email";
+      return;
+    }
+
+    // Password validation
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*?&]).{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+      errorMsg.innerText =
+        "Password must contain uppercase, lowercase, number & special character";
+      return;
+    }
+
+    // Save login status (demo purpose)
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("username", username);
+    localStorage.setItem("email", email);
+
+    window.location.href = "index.html";
+  });
+</script>
+
+</body>
+</html>

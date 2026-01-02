@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  border: 1px solid #cccccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #dddddd;
+  padding: 10px 0;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+/* Existing cart page styles here */
+
+/* Remove button styles */
+.cart-item button.remove-btn {
+  background-color: #5c6bcf;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cart-item button.remove-btn:hover {
+  background-color: #6959d3;
+}
+
+.cart-header {
+  background-color: #5d98d6;   /* blue background */
+  color: white;
+  padding: 15px 30px;
+  font-size: 22px;
+}
+.add-to-cart {
+  background-color: #007bff;   /* BLUE */
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.add-to-cart:hover {
+  background-color: #0056b3;
+}
