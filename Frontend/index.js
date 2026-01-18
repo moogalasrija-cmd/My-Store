@@ -66,12 +66,27 @@ function addToCart(id) {
     .then(res => res.json())
     .then(product => {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push(product);
+
+      const existing = cart.find(p => p.id === product.id);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1   // ✅ IMPORTANT
+        });
+      }
+
       localStorage.setItem("cart", JSON.stringify(cart));
       alert("Added to cart");
     })
     .catch(() => alert("Could not add to cart"));
 }
+
 
 // ------------------ Open Product Page ------------------
 function openProduct(id) {
@@ -86,18 +101,22 @@ function viewProduct(id){
     window.location.href = `product.html?id=${id}`; // ✅ correct
 }
 
+if (localStorage.getItem("token")) {
+  // show logout
+} else {
+  // show login
+}
+
 function logout() {
-  // Remove user data
-  localStorage.removeItem("user"); // or your key name
+  // optional: login data clear
+  localStorage.clear();
+  sessionStorage.clear();
 
-  // Redirect to login page
-  if(!localStorage.getItem("user")){
-  window.location.href = "login.html";
-function login() {
-    // after successful login
-    localStorage.setItem("user", "true"); // or any user info
-    window.location.href = "index.html";
-}
-
-}
+  // confirmation popup
+  const confirmLogout = confirm("Are you sure you want to logout?");
+  
+  if (confirmLogout) {
+    alert("Logout successful");
+    window.location.href = "login.html";
+  }
 }

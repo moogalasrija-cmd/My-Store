@@ -108,60 +108,16 @@
   <div class="links">
     <a onclick="forgotPassword()">Forgot Password?</a>
   </div>
+  <p style="text-align:center; margin-top:10px;">
+  New user?
+  <a href="register.html">Register here</a>
+</p>
+
 
   <p class="error" id="errorMsg"></p>
 </div>
+<script src="login.js"></script>
 
-<script>
-  function forgotPassword() {
-    alert("Password reset link sent to your email (demo)");
-  }
-
-  function cancelLogin() {
-    document.getElementById("loginForm").reset();
-    document.getElementById("errorMsg").innerText = "";
-  }
-
-  document.getElementById("loginForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const username = document.getElementById("username").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const errorMsg = document.getElementById("errorMsg");
-
-    errorMsg.innerText = "";
-
-    // Username validation
-    if (username.length < 3) {
-      errorMsg.innerText = "Username must be at least 3 characters";
-      return;
-    }
-
-    // Email validation
-    if (!email.includes("@")) {
-      errorMsg.innerText = "Enter a valid email";
-      return;
-    }
-
-    // Password validation
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*?&]).{6,}$/;
-
-    if (!passwordRegex.test(password)) {
-      errorMsg.innerText =
-        "Password must contain uppercase, lowercase, number & special character";
-      return;
-    }
-
-    // Save login status (demo purpose)
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("username", username);
-    localStorage.setItem("email", email);
-
-    window.location.href = "index.html";
-  });
-</script>
 
 </body>
 </html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .register-box {
+      background: #fff;
+      padding: 50px;
+      width: 350px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .register-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .register-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .buttons button {
+      width: 100%;
+      padding: 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .cancel-btn {
+      background: #6c757d;
+      color: white;
+    }
+
+    .submit-btn {
+      background: #007bff;
+      color: white;
+    }
+
+    .cancel-btn:hover {
+      background: #5a6268;
+    }
+
+    .submit-btn:hover {
+      background: #0056b3;
+    }
+
+    .links {
+      margin-top: 10px;
+      text-align: right;
+      font-size: 14px;
+    }
+
+    .links a {
+      color: #007bff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+
+<div class="register-box product-card">
+  <h2 style="text-align:center;">Create Account</h2>
+  <p style="text-align:center; color:#555;">
+    Register to start shopping 🛒
+  </p>
+
+  <form id="registerForm">
+    <div class="form-group">
+      <input type="text" id="username" placeholder="👤 Full Name" required>
+    </div>
+
+    <div class="form-group">
+      <input type="email" id="email" placeholder="📧 Email Address" required>
+    </div>
+
+    <div class="form-group">
+      <input type="password" id="password" placeholder="🔒 Password" required>
+    </div>
+
+    <button type="submit" class="add-to-cart" style="width:50%;">
+      Create Account
+    </button>
+  </form>
+
+  <p style="text-align:center; margin-top:15px;">
+    Already have an account?
+    <a href="login.html">Login</a>
+  </p>
+</div>
+
+<script src="register.js"></script>
+</body>
+</html>

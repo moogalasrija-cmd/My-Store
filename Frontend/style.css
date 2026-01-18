@@ -3,6 +3,8 @@ body {
   padding: 20px;
 }
 
+/* ================= PRODUCTS ================= */
+
 .products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -15,11 +17,14 @@ body {
   text-align: center;
 }
 
+/* Used for product images */
 .product-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
+
+/* ================= CART ================= */
 
 .cart-item {
   display: flex;
@@ -34,9 +39,8 @@ body {
   height: 80px;
   object-fit: cover;
 }
-/* Existing cart page styles here */
 
-/* Remove button styles */
+/* Remove button */
 .cart-item button.remove-btn {
   background-color: #5c6bcf;
   color: white;
@@ -51,20 +55,41 @@ body {
   background-color: #6959d3;
 }
 
+/* Cart header */
 .cart-header {
-  background-color: #5d98d6;   /* blue background */
+  background-color: #5d98d6;
   color: white;
   padding: 15px 30px;
   font-size: 22px;
 }
+
+/* ================= BUTTONS ================= */
+
 .add-to-cart {
-  background-color: #007bff;   /* BLUE */
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 8px 14px;
   border-radius: 5px;
   cursor: pointer;
 }
+
 .add-to-cart:hover {
   background-color: #0056b3;
+}
+
+/* ================= REGISTER PAGE (USING SAME STYLE) ================= */
+
+/* Register page container reused from product-card */
+.register-box {
+  max-width: 500px;
+  margin: 50px 60px;
+}
+
+/* Inputs styled inline or default browser style */
+/* No new colors or fonts added to keep same UI */
+
+/* Optional spacing helper */
+.form-group {
+  margin-bottom: 20px;
 }

@@ -12,6 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
+if (!id) {
+  document.getElementById("productDetails").innerHTML =
+    "<h2>Product not found</h2>";
+  throw new Error("No product id");
+}
+
 fetch(`http://localhost:3000/products/${id}`)
   .then(res => {
     if (!res.ok) throw new Error("Product not found");
@@ -21,9 +27,9 @@ fetch(`http://localhost:3000/products/${id}`)
 console.log(product);
     document.getElementById("productDetails").innerHTML = `
       <div class="product-detail-card">
-        <img src="${product.imageUrl}" style="width:300px" alt="${product.name}">
+        <img src="${product.image}" style="width:300px" alt="${product.name}">
         <h2>${product.name}</h2>
-        <p>${product.description || ""}</p>
+        <p>${product.description || " Nice quality product"}</p>
         <h3>₹${product.price}</h3>
         <p>Material: ${product.material || ""}</p>
         <p>Sizes: ${(product.sizes || []).join(", ")}</p>

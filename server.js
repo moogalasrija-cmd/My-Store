@@ -1,20 +1,22 @@
+require('dotenv').config(); // this loads the .env variables
+const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const User = require("./models/User");
+const bcrypt = require("bcryptjs");
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
+
 
 app.use(cors());
 app.use(express.json());
 
-// 👉 Frontend serve
-app.use(express.static(path.join(__dirname, "Frontend")));
 
-// 👉 Default page = login.html
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "Frontend", "login.html"));
-});
-
-// 🔹 Products (UNCHANGED)
+// 🔹 Products 
 const products = [
    { id: 1, name: "Jacket", price: 600, material: "Cotton", sizes: ["S","M","L","XL","XXL"], image: "https://images.unsplash.com/photo-1520975916090-3105956dac38" },
  { id: 2, name: "Shirt", price: 650, material: "Cotton", sizes: ["S","M","L","XL"], image: "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e" }, 
@@ -37,18 +39,55 @@ const products = [
       { id: 19, name: "Shirts", price: 1300, material: "Cotton", sizes: ["M","L","XL"], image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf" }, 
       { id: 20, name: "T-Shirt", price: 2500, material: "Silk", sizes: ["M","L","XL"], image: "https://images.unsplash.com/photo-1618354691438-25bc04584c23" } ];
 app.get("/products",(req,res)=>res.json(products));
-app.get("/products/:id",(req,res)=>{
-  const p = products.find(x=>x.id==req.params.id);
-  p ? res.json(p) : res.status(404).json({error:"Not found"});
+app.get("/products/:id", (req, res) => {
+  
+  const product = products.find(p => p.id == req.params.id);
+  if (!product) return res.status(404).json({ message: "Not found" });
+  res.json(product);
 });
+// 👉 Default page = login.html
 app.get("/", (req, res) => {
-  // Check if user is logged in
-  if (req.session.user) {
-    res.redirect("/index.html"); // already logged in → index
-  } else {
-    res.redirect("/login.html"); // not logged in → login page
+  res.sendFile(path.join(__dirname, "Frontend", "login.html"));
+});
+app.use(express.static("Frontend"));
+
+
+// 👉 Frontend serve
+app.use(express.static(path.join(__dirname, "Frontend")));
+
+
+app.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    const exists = await User.findOne({ email });
+    if (exists) return res.status(400).json({ message: "Already registered" });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({ username, email, password:hashedPassword });
+    res.json({ message: "Registered successfully", user: newUser });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user)
+      return res.status(400).json({ message: "You are not registered" });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
+
+    res.json({ message: "Login successful", user });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 
 
 app.listen(3000,()=>console.log("http://localhost:3000"));
